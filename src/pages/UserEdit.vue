@@ -3,17 +3,30 @@
     <button class="button" @click="$router.go(-1)"> Back </button>
     <h1 class="title">User Edit {{$route.params.id}}</h1>
   <form>
-    <input type="text" class="input" v-model="user.username">
-    <input type="text" class="input" v-model="user.email">
-    <button @click="saveUser(user.id)" class="button is-link" type="button">Save</button>
-    <router-link to="/user" class="button is-link is-light">Cancel</router-link>  
+    <div class="field">
+      <label class="label">Username</label>
+      <div class="control">
+        <input type="text" class="input" v-model="user.username">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input type="text" class="input" v-model="user.email">
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <button @click="saveUser(user.id)" class="button is-link" type="button">Save</button>
+      </div>
+      <div class="control">
+        <router-link to="/user" class="button is-link is-light">Cancel</router-link>  
+      </div>
+    </div>
     
   </form>
-    
-    
-    <!-- <pre>
-      {{user}}
-    </pre> -->
     
   </div>
 </template>
@@ -35,7 +48,7 @@ export default {
   methods: {
     async saveUser(id) {
       try {
-        const res =  await axios.put(url + '/' + id)
+        const res =  await axios.put(url + '/' + id, this.user)
         console.log(res)
       } catch (error) {
         console.log(error.message)
