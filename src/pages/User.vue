@@ -15,11 +15,18 @@
         <th>
           Email
         </th>
+        <th>
+          Action
+        </th>
       </tr>
       <tr v-for="each in users" :key="each.id">
         <td> <router-link :to="'/user/'+each.id">{{each.name}}</router-link>  </td>
         <td> {{each.username}} </td>
         <td> {{each.email}} </td>
+        <td>
+          <router-link :to="'/user/edit/'+each.id" class="button is-warning">Edit</router-link>  
+          <button @click="deleteUser(each.id)" class="button is-danger" >Delete</button>
+        </td>
       </tr>
     </table>
   </div>
@@ -30,6 +37,9 @@ import axios from 'axios'
 
 const url = 'https://jsonplaceholder.typicode.com/users'
 export default {
+  mounted() {
+    this.getUsers()
+  },
   data() {
     return {
       users: []
@@ -45,6 +55,19 @@ export default {
         console.log(error.message)
       }
       
+    },
+
+    async deleteUser(id) {
+      // console.log(id)
+      try {
+        const deleteUser = confirm('Are you sure to delete user ' + id + '?')
+        if(deleteUser) {
+          const result = await axios.delete(url + '/' + id)
+          console.log(result.data)
+        }
+      } catch (error) {
+        console.log(error.message)
+      }
     }
   }
 }

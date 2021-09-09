@@ -7,6 +7,7 @@ import About from './pages/About.vue'
 import Contact from './pages/Contact.vue'
 import User from './pages/User.vue'
 import UserProfile from './pages/UserProfile.vue'
+import UserEdit from './pages/UserEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,8 @@ const routes = [
     { path: '/about', component: About},    
     { path: '/contact', component: Contact},
     { path: '/user', component: User},
-    { path: '/user/:id', component: UserProfile}
+    { path: '/user/:id', component: UserProfile},
+    { path: '/user/edit/:id', component: UserEdit}
 ]
 
 const router = new VueRouter({
